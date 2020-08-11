@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fearsing.zhihu.mapper.HotListMapper">
+    <insert id="insert" parameterType="java.util.HashMap">
+        INSERT INTO hot_question
+               (
+                query_id,
+                question,
+                question_url,
+                hot_rank,
+                time_code,
+                update_time)
+      VALUES (
+                #{id,javaType=String,jdbcType=VARCHAR},
+                #{question,javaType=String,jdbcType=VARCHAR},
+                #{question_url,javaType=String,jdbcType=VARCHAR},
+                #{hot_rank,javaType=String,jdbcType=VARCHAR},
+                #{time_code,javaType=String,jdbcType=VARCHAR},
+                #{update_time,javaType=String,jdbcType=VARCHAR})
+    </insert>
+</mapper>
