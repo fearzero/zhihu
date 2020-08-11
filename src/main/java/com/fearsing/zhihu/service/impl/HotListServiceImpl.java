@@ -8,6 +8,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ public class HotListServiceImpl implements HotListService {
     @Autowired
     LoginTokenMapper tokenMapper;
 
-
+    private static Logger log = LoggerFactory.getLogger(HotListServiceImpl.class);
     @Override
     public Map<String, Object> insert() {
         HotListServiceImpl testService=new HotListServiceImpl();
@@ -41,7 +43,7 @@ public class HotListServiceImpl implements HotListService {
                 mapper.insert(map1);
             }catch (Exception e)
             {
-                e.printStackTrace();
+                log.error("token 失效");
             }
         }
         return null;
@@ -78,7 +80,7 @@ public class HotListServiceImpl implements HotListService {
            }
 
        } catch (IOException e) {
-           e.printStackTrace();
+           log.error("token 失效");
        }
 
 
