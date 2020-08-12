@@ -4,6 +4,7 @@ package com.fearsing.zhihu.service.impl;
 import com.fearsing.zhihu.mapper.HotListMapper;
 import com.fearsing.zhihu.mapper.LoginTokenMapper;
 import com.fearsing.zhihu.service.HotListService;
+import com.fearsing.zhihu.service.SendMailService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -27,6 +28,9 @@ public class HotListServiceImpl implements HotListService {
     HotListMapper mapper;
     @Autowired
     LoginTokenMapper tokenMapper;
+    @Autowired
+    SendMailService sendMailService;
+
 
     private static Logger log = LoggerFactory.getLogger(HotListServiceImpl.class);
     @Override
@@ -43,7 +47,8 @@ public class HotListServiceImpl implements HotListService {
                 mapper.insert(map1);
             }catch (Exception e)
             {
-                log.error("token 失效");
+                log.error("写库失败");
+                sendMailService.sendSimpleMail("fearling@outlook.com","知乎数据爬取失败","写库失败");
             }
         }
         return null;
@@ -81,6 +86,7 @@ public class HotListServiceImpl implements HotListService {
 
        } catch (IOException e) {
            log.error("token 失效");
+           sendMailService.sendSimpleMail("fearling@outlook.com","知乎数据爬取失败","token失效");
        }
 
 
